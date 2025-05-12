@@ -1,0 +1,50 @@
+Authentication: ----
+/users/login/email=?,pass=? -> role (login)
+/users/signup/username,email,pass (signup)
+
+Events: ---- 
+/event/add
+/event/delete
+/event/edit
+/event/show
+/event/show:id
+
+/event/register/:id:name:email
+
+Application de Navigation: -----
+/floors/
+/floors/:id
+/floors/:id/rooms
+
+/rooms/:id
+/rooms/:id/panoramas
+/rooms/:id/central
+
+/panoramas/:id
+/panoramas/:id/image
+/panoramas/:id/hotspots
+
+/hotspots/:id
+/hotspots/:id/exhibit
+/hotspots/:id/target
+
+Application de reservation:
+/visits POST
+Body: {
+  "full_name": "John Doe",
+  "email": "john@example.com",
+  "phone": "1234567890",
+  "visit_type_id": 2,
+  "visit_date": "2025-06-01",
+  "time_slot": "14:00",
+  "people_count": 4,
+  "message": "My kids love history!"
+}
+
+/admin/visits
+
+/visits/:id
+/visits/:id/cancel
+/admin/visits/:id/confirm
+/admin/visits/:id/delete
+
