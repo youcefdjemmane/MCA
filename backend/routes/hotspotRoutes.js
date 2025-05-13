@@ -1,16 +1,16 @@
 // routes/hotspotRoutes.js
 import express from 'express';
-import { getHotspot, getHotspotExhibit, getHotspotTarget } from '../controllers/hotspotController.js';
+import { getHotspotController, getHotspotExhibitController, getHotspotTargetController } from '../controllers/hotspotController.js';
 
 const router = express.Router();
 
 // Route pour récupérer un hotspot spécifique par ID
-router.get('/hotspots/:id', getHotspot);
+router.get('/hotspots/:id', getHotspotController);
 
 // Route pour récupérer l'exposition d'un hotspot
-router.get('/hotspots/:id/exhibit', getHotspotExhibit);
+router.get('/hotspots/:id/exhibit', getHotspotExhibitController);
 
 // Route pour récupérer la cible d'un hotspot
-router.get('/hotspots/:id/target', getHotspotTarget);
+router.get('/hotspots/:id/target', getHotspotTargetController);
 
 export default router;

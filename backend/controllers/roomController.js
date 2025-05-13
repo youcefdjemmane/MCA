@@ -1,35 +1,77 @@
+import * as roomModel from '../models/roomModel.js';
 
-import * as goApiService from '../services/goApiService.js';
-
-// Récupérer une salle spécifique par ID
+// ✅ Récupérer une salle par ID
 export const getRoom = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await goApiService.getRoom(id);
-    res.json(response.data);
+    const room = await roomModel.getRoomById(id);
+
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        message: `Salle avec ID ${id} introuvable.`,
+        data: null
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `Salle ${id} récupérée avec succès.`,
+      data: room
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la récupération de la salle.' });
+    res.status(500).json({
+      success: false,
+      message: "Erreur serveur lors de la récupération de la salle.",
+      error: error.message
+    });
   }
 };
 
-// Récupérer les panoramas d'une salle par ID
+// ✅ Récupérer les panoramas d’une salle
 export const getRoomPanoramas = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await goApiService.getRoomPanoramas(id);
-    res.json(response.data);
+    const panoramas = await roomModel.getRoomPanoramas(id);
+
+    res.status(200).json({
+      success: true,
+      message: `Panoramas de la salle ${id} récupérés.`,
+      data: panoramas
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la récupération des panoramas de la salle.' });
+    res.status(500).json({
+      success: false,
+      message: "Erreur serveur lors de la récupération des panoramas.",
+      error: error.message
+    });
   }
 };
 
-// Récupérer l'information centrale d'une salle par ID
+// ✅ Récupérer le panorama central
 export const getRoomCentral = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await goApiService.getRoomCentral(id);
-    res.json(response.data);
+    const centralPanorama = await roomModel.getRoomCentralPanorama(id);
+
+    if (!centralPanorama) {
+      return res.status(404).json({
+        success: false,
+        message: `Aucun panorama central défini pour la salle ${id}.`,
+        data: null
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `Panorama central de la salle ${id} récupéré.`,
+      data: centralPanorama
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la récupération des informations centrales de la salle.' });
+    res.status(500).json({
+      success: false,
+      message: "Erreur serveur lors de la récupération du panorama central.",
+      error: error.message
+    });
   }
 };
