@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import CollectionsPage from './pages/CollectionsPage';
+import VisitReservationPage from './pages/VisitReservationPage';
+import VirtualVisit from './pages/VirtualVisit';
+
+
+// Placeholder components
+const Home = () => <div className="p-6 text-center text-xl">Welcome to the Museum</div>;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+        <div className="text-2xl font-bold text-gray-800">Museum</div>
+        <div className="space-x-6">
+          <Link to="/collections" className="text-gray-600 hover:text-gray-900">Collections</Link>
+          <Link to="/reserve" className="text-gray-600 hover:text-gray-900">Reserve a Visit</Link>
+          <Link to="/virtual" className="text-gray-600 hover:text-gray-900">Virtual Visit</Link>
+        </div>
+      </nav>
+
+      <main className="min-h-screen bg-gray-100">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/collections" element={<CollectionsPage />} />
+          <Route path="/reserve" element={<VisitReservationPage />} />
+          <Route path="/virtual" element={<VirtualVisit />} />
+        </Routes>
+      </main>
+    </Router>
+  );
 }
 
-export default App
+export default App;
