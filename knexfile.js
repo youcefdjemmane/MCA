@@ -1,10 +1,4 @@
-// Update with your config settings.
-
-/**
- * @type { Object.<string, import("knex").Knex.Config> }
- */
-module.exports = {
-
+const config = {
   development: {
     client: 'postgresql',
     connection: {
@@ -17,7 +11,7 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations',
+      tableName: 'knex_migrations'
     }
   },
 
@@ -52,5 +46,6 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   }
-
 };
+
+export default config;
